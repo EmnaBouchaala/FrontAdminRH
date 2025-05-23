@@ -1,0 +1,54 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="card-title mb-0">Nouvelle Demande</h5>
+        </div>
+        <div class="card-body">
+          <form #demandeForm="ngForm" (ngSubmit)="submitDemande()">
+            <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea
+                class="form-control"
+                id="description"
+                name="description"
+                [(ngModel)]="demande.description"
+                required
+                placeholder="Entrez la description de la demande"
+              ></textarea>
+            </div>
+
+            <div class="mb-3">
+              <label for="date" class="form-label">Date</label>
+              <input
+                type="date"
+                class="form-control"
+                id="date"
+                name="date"
+                [(ngModel)]="demande.datecreation"
+                required
+              />
+            </div>
+            <div class="mb-3">
+              <label for="id" class="form-label">typeDemande</label>
+              <select
+                class="form-select"
+                id="demandeType"
+                name="demandeType"
+                [(ngModel)]="demande.typeDemande"
+                required
+              >
+                <option value="" disabled selected>Choisir le type de demande</option>
+                <option *ngFor="let type of typesDemande" [value]="type">{{ type }}</option>
+              </select>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!demandeForm.form.valid">Soumettre</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Playfair+Display:wght@600&display=swap');
+
+:root {
+  --main-red: #c0392b;
+  --light-red: #e74c3c;
+  --white: #ffffff;
+  --gray: #f8f9fa;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --transition-speed: 0.3s;
+}
+
+/* Global Styles */
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Header */
+#page-topbar {
+  background-color: var(--main-red);
+  color: var(--white);
+  box-shadow: var(--shadow);
+  transition: background-color var(--transition-speed);
+}
+
+/* Logo hover effect */
+.navbar-brand-box a:hover img {
+  transform: scale(1.05);
+  transition: transform 0.4s ease-in-out;
+}
+
+/* Menu button */
+#vertical-menu-btn {
+  color: var(--white);
+  background-color: transparent;
+  border: none;
+  transition: color var(--transition-speed), transform var(--transition-speed);
+}
+#vertical-menu-btn:hover {
+  color: var(--light-red);
+  transform: scale(1.1);
+}
+
+/* Search bar */
+.app-search input {
+  border-radius: 30px;
+  padding-left: 40px;
+  background: var(--gray);
+  color: #333;
+  border: none;
+  transition: box-shadow var(--transition-speed);
+}
+.app-search input:focus {
+  box-shadow: 0 0 10px var(--light-red);
+}
+
+/* Dropdown toggle */
+.header-item {
+  font-family: 'Playfair Display', serif;
+  color: var(--white);
+  transition: all var(--transition-speed);
+}
+.header-item:hover {
+  color: var(--light-red);
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+
+/* Dropdown menu */
+.dropdown-menu {
+  border-radius: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* User name & icons */
+#page-header-user-dropdown span {
+  font-weight: bold;
+}
+
+/* Cog icon spin hover */
+.right-bar-toggle:hover i {
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Fullscreen button */
+.bx-fullscreen:hover {
+  color: var(--light-red);
+  transform: scale(1.2);
+}

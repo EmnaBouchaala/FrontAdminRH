@@ -1,0 +1,209 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          
+
+          <!-- Bouton ajouter une formation (visible uniquement administrateur) -->
+          <div class="row mb-2">
+            <div class="col-sm-8">
+              <div *ngIf="currentUser.role === 'Administrateur'" class="text-sm-end">
+                <button type="button" (click)="openModal(formationModal)" class="btn btn-success btn-rounded mb-2">
+                  <i class="mdi mdi-plus me-1"></i> New Formation
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Table des formations -->
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let formation of formations; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ formation.titre }}</td>
+                  <td>{{ formation.type }}</td>
+                  <td>{{ formation.etat }}</td>
+                  <td>
+                    <!-- Boutons modifier, supprimer, accepter, rejeter uniquement pour admin -->
+                    <button *ngIf="currentUser.role === 'Administrateur'" class="btn btn-info btn-sm me-1" (click)="openModal(formationModal, formation)">
+                      Modifier
+                    </button>
+                    <button *ngIf="currentUser.role === 'Administrateur'" class="btn btn-danger btn-sm me-1" (click)="deleteFormation(formation.id)">
+                      Supprimer
+                    </button>
+                    <button *ngIf="currentUser.role === 'Administrateur'" class="btn btn-success btn-sm me-1" (click)="acceptFormation(formation.id)">
+                      Accepter
+                    </button>
+                    <button *ngIf="currentUser.role === 'Administrateur'" class="btn btn-warning btn-sm me-1" (click)="rejectFormation(formation.id)">
+                      Rejeter
+                    </button>
+
+                    <!-- Bouton consulter visible pour tous -->
+                    <button class="btn btn-primary btn-sm" (click)="selectFormation(formation)">
+                      Consulter
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Modal ajout / modification de formation -->
+          <ng-template #formationModal>
+            <div class="modal-header">
+              <h5 class="modal-title">Add/Edit Formation</h5>
+              <button type="button" class="btn-close" aria-label="Close" (click)="formationModalRef?.hide()"></button>
+            </div>
+            <div class="modal-body">
+              <form (ngSubmit)="saveFormation(formationForm)" #formationForm="ngForm">
+                <div class="mb-3">
+                  <label class="form-label">Title</label>
+                  <input type="text" class="form-control" [(ngModel)]="newFormation.titre" name="titre" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Description</label>
+                  <textarea class="form-control" [(ngModel)]="newFormation.description" name="description"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Type</label>
+                  <input type="text" class="form-control" [(ngModel)]="newFormation.type" name="type" required />
+                </div>
+                <button type="submit" class="btn btn-success">Save</button>
+              </form>
+            </div>
+          </ng-template>
+
+          <!-- Section des cours -->
+          <div *ngIf="selectedFormation" class="mt-4 card p-3">
+            <h5 class="mb-3">Cours pour la formation : {{ selectedFormation.titre }}</h5>
+
+            <!-- Liste des cours -->
+            <ul class="list-group mb-3">
+              <li *ngFor="let c of selectedFormation.cours" class="list-group-item d-flex justify-content-between align-items-center">
+                {{ c.titre }}
+                <a [href]="c.urlFichier" target="_blank" class="btn btn-outline-primary btn-sm">Voir</a>
+              </li>
+             
+              <li *ngIf="!selectedFormation.cours?.length" class="list-group-item text-muted">
+                Aucun cours encore
+              </li>
+            </ul>
+
+            <!-- Formulaire ajout de cours (visible uniquement admin) -->
+            <form *ngIf="currentUser.role === 'Administrateur'" (ngSubmit)="uploadCours()" #coursForm="ngForm">
+              <div class="row align-items-end">
+                <div class="col-md-4">
+                  <label>Titre du cours</label>
+                  <input type="text" class="form-control" [(ngModel)]="newCours.titre" name="titre" required>
+                </div>
+                <div class="col-md-4">
+                  <label>Fichier</label>
+                  <input type="file" (change)="onFileSelected($event)" class="form-control" required>
+                </div>
+                <div class="col-md-4">
+                  <button type="submit" class="btn btn-success">Ajouter le cours</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Section des quizzes -->
+  <div *ngIf="selectedFormation" class="mt-4 card p-3">
+    <h5 class="mb-3">Quizzes pour la formation : {{ selectedFormation.titre }}</h5>
+
+    <!-- Bouton ajout quiz uniquement admin -->
+    <button *ngIf="currentUser.role === 'Administrateur'" class="btn btn-primary mb-3" (click)="openQuizModal()">Ajouter un Quiz</button>
+
+    <ul class="list-group mb-3">
+      <li *ngFor="let quiz of quizzes" class="list-group-item d-flex justify-content-between align-items-center">
+        {{ quiz.titre }}
+        <div>
+          <!-- Modifier et supprimer quiz uniquement admin -->
+          <button *ngIf="currentUser.role === 'Administrateur'" class="btn btn-sm btn-info me-2" (click)="openQuizModal(quiz)">Modifier</button>
+          <button *ngIf="currentUser.role === 'Administrateur'" class="btn btn-sm btn-danger" (click)="deleteQuiz(quiz.id!)">Supprimer</button>
+        </div>
+      </li>
+      <li *ngIf="!quizzes.length" class="text-muted">Aucun quiz pour cette formation</li>
+    </ul>
+  </div>
+
+  <!-- Modal Quiz -->
+  <ng-template #quizModal>
+    <div class="modal-header">
+      <h5 class="modal-title">{{ selectedQuiz ? 'Modifier Quiz' : 'Créer Quiz' }}</h5>
+      <button type="button" class="btn-close" aria-label="Close" (click)="quizModalRef?.hide()"></button>
+    </div>
+    <div class="modal-body">
+      <form #quizForm="ngForm" (ngSubmit)="saveQuiz()">
+        <div class="mb-3">
+          <label class="form-label">Titre du Quiz</label>
+          <input type="text" class="form-control" [(ngModel)]="newQuiz.titre" name="titre" required />
+        </div>
+        <button type="submit" class="btn btn-success mb-3">{{ selectedQuiz ? 'Mettre à jour' : 'Créer' }}</button>
+      </form>
+
+      <div *ngIf="selectedQuiz">
+        <h6>Questions</h6>
+        <ul class="list-group mb-3">
+          <li *ngFor="let question of selectedQuiz.questions || []" class="list-group-item d-flex justify-content-between align-items-center">
+            {{ question.question_text }}
+            <div>
+              <button class="btn btn-sm btn-primary me-2" (click)="editQuestion(question)">Modifier</button>
+              <button class="btn btn-sm btn-danger" (click)="deleteQuestion(question.id!)">Supprimer</button>
+            </div>
+          </li>
+          <li *ngIf="!(selectedQuiz.questions?.length)" class="text-muted">Aucune question</li>
+        </ul>
+
+        <!-- Formulaire ajout/modification question -->
+        <form (ngSubmit)="saveQuestion()" #questionForm="ngForm" class="mb-3">
+          <input type="text" class="form-control mb-2" placeholder="Texte de la question"
+            [(ngModel)]="newQuestion.question_text" name="question_text" required />
+          <button type="submit" class="btn btn-success">{{ newQuestion.id ? 'Modifier' : 'Ajouter' }} question</button>
+        </form>
+
+        <div *ngIf="newQuestion.id">
+          <h6>Options</h6>
+          <ul class="list-group mb-3">
+            <li *ngFor="let option of newQuestion.options || []" class="list-group-item d-flex justify-content-between align-items-center">
+              {{ option.option_text }} <span *ngIf="option.is_correct" class="badge bg-success">Correcte</span>
+              <div>
+                <button class="btn btn-sm btn-primary me-2" (click)="editOption(option)">Modifier</button>
+                <button class="btn btn-sm btn-danger" (click)="deleteOption(option.id!)">Supprimer</button>
+              </div>
+            </li>
+            <li *ngIf="!(newQuestion.options?.length)" class="text-muted">Aucune option</li>
+          </ul>
+
+          <!-- Formulaire ajout/modification option -->
+          <form (ngSubmit)="saveOption()" #optionForm="ngForm">
+            <input type="text" class="form-control mb-2" placeholder="Texte de l'option"
+              [(ngModel)]="newOption.option_text" name="option_text" required />
+            <div class="form-check mb-3">
+              <input type="checkbox" class="form-check-input" id="isCorrect" [(ngModel)]="newOption.is_correct" name="is_correct" />
+              <label class="form-check-label" for="isCorrect">Correcte</label>
+            </div>
+            <button type="submit" class="btn btn-success">{{ newOption.id ? 'Modifier' : 'Ajouter' }} option</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+
+</div>

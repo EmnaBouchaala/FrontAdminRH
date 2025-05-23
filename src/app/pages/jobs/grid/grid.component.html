@@ -1,0 +1,74 @@
+<div class="container mt-4">
+  <h3>Liste des Formations</h3>
+
+  <div *ngIf="formations.length === 0" class="alert alert-info">Aucune formation disponible.</div>
+
+  <ul class="list-group mb-4">
+    <li *ngFor="let formation of formations" class="list-group-item d-flex justify-content-between align-items-center">
+      {{ formation.titre }}
+      <button class="btn btn-primary btn-sm" (click)="openQuizForFormation(formation)">Passer Quiz</button>
+    </li>
+  </ul>
+</div>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Modal quiz -->
+<ng-template #quizModal>
+  <div class="timer mb-2">
+  Temps restant : {{ timeLeft }} secondes
+</div>
+
+  <div class="modal-header">
+    <h5 class="modal-title">{{ selectedQuiz?.titre || 'Quiz' }}</h5>
+    <button type="button" class="btn-close" aria-label="Close" (click)="quizModalRef?.hide()"></button>
+  </div>
+
+  <div class="modal-body" *ngIf="quizQuestions.length > 0">
+    <div [@fadeAnimation]>
+      <h6>Question {{ currentQuestionIndex + 1 }} / {{ quizQuestions.length }}</h6>
+      <p>{{ quizQuestions[currentQuestionIndex].question_text }}</p>
+
+      <div *ngFor="let option of quizQuestions[currentQuestionIndex].options" class="form-check">
+        <input
+          type="radio"
+          class="form-check-input"
+          [name]="'q' + quizQuestions[currentQuestionIndex].id"
+          [value]="option.id"
+          (change)="selectOption(quizQuestions[currentQuestionIndex].id, option.id)"
+          [checked]="userAnswers[quizQuestions[currentQuestionIndex].id] === option.id"
+          id="option{{ option.id }}"
+        />
+        <label class="form-check-label" [for]="'option' + option.id">{{ option.option_text }}</label>
+      </div>
+
+      <div class="d-flex justify-content-between mt-3">
+        <button class="btn btn-secondary" (click)="previousQuestion()" [disabled]="currentQuestionIndex === 0">Précédent</button>
+
+        <button *ngIf="currentQuestionIndex < quizQuestions.length - 1"
+                class="btn btn-secondary"
+                (click)="nextQuestion()"
+                [disabled]="!userAnswers[quizQuestions[currentQuestionIndex].id]">Suivant</button>
+
+        <button *ngIf="currentQuestionIndex === quizQuestions.length - 1"
+                class="btn btn-success"
+                (click)="submitQuiz()"
+                [disabled]="!userAnswers[quizQuestions[currentQuestionIndex].id]">Soumettre</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="quizQuestions.length === 0" class="text-center">
+    <p>Aucune question disponible pour ce quiz.</p>
+  </div>
+
+ <div *ngIf="score !== null" class="alert alert-info mt-3">
+  Votre score est : {{ score }} / {{ quizQuestions.length * pointsPerQuestion }}
+
+  <div *ngIf="score >= (quizQuestions.length * pointsPerQuestion) / 2" class="mt-3 text-center">
+
+    <button class="btn btn-outline-success" (click)="downloadCertificate()">Télécharger l'attestation</button>
+  </div>
+</div>
+
+
+</ng-template>

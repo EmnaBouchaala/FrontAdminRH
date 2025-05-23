@@ -1,0 +1,50 @@
+<div class="container-fluid">
+  <form #fournitureForm="ngForm" (ngSubmit)="onSubmit()" class="row">
+    <div class="col-lg-8">
+      <div class="card">
+        <div class="card-body">
+
+          <div class="mb-3">
+            <label for="nom" class="form-label">Nom de la fourniture</label>
+            <input name="nom" [(ngModel)]="fourniture.nom" type="text" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="quantite" class="form-label">Quantité</label>
+            <input name="quantite" [(ngModel)]="fourniture.quantite" type="number" class="form-control" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="matiere" class="form-label">Choisir une matière</label>
+            <select name="matiere_id" [(ngModel)]="fourniture.MatiereId" class="form-select" required>
+              <option [ngValue]="null">-- Sélectionnez une matière --</option>
+              <option *ngFor="let m of matieres" [value]="m.id">
+                {{ m.nom }} (Stock: {{ m.quantite }})
+              </option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="typeFourniture" class="form-label">Type de fourniture</label>
+            <select name="type_Fourniture_id" [(ngModel)]="fourniture.TypeFournitureId" class="form-select" required>
+              <option [ngValue]="null">-- Sélectionnez un type --</option>
+              <option *ngFor="let t of types" [value]="t.id">
+                {{ t.nom }} (Prévision: {{ t.qte }})
+              </option>
+            </select>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Soumettre la demande</h5>
+          <button type="submit" [disabled]="fournitureForm.invalid" class="btn btn-primary w-100">Envoyer</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,70 @@
+/* ---- Conteneur principal ---- */
+.card {
+  border: none;
+  border-radius: 16px;
+  background: #fdf6f8; /* fond rose très pâle */
+  box-shadow: 0 8px 24px rgba(211, 3, 3, 0.12); /* ombre rouge */
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* ---- En-tête ---- */
+.card-header {
+  background-color: #d30303; /* rouge foncé */
+  color: white;
+  padding: 1rem 1.5rem;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+/* ---- Labels ---- */
+.form-label {
+  font-weight: 600;
+  color: #d30303;
+}
+
+/* ---- Champs de saisie ---- */
+.form-control,
+.form-select {
+  border-radius: 12px;
+  border: 1px solid #f2b1b1; /* couleur douce assortie */
+  padding: 0.6rem 1rem;
+  background-color: #fff;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #d30303;
+  box-shadow: 0 0 0 3px rgba(211, 3, 3, 0.25);
+  outline: none;
+}
+
+/* ---- Bouton principal ---- */
+.btn-primary {
+  background-color: #d30303;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 16px rgba(211, 3, 3, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: #a00202; /* rouge foncé un peu plus sombre au hover */
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(160, 2, 2, 0.35);
+}
+ 

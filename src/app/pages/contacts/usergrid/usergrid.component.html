@@ -1,0 +1,44 @@
+<app-page-title title="Gestion des Services" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+<div class="mb-3 text-end">
+  <button class="btn btn-primary" (click)="openModal(template)">Ajouter un service</button>
+</div>
+
+<div class="row">
+  <div class="col-lg-4 mb-3" *ngFor="let s of services">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{ s.nom }}</h5>
+        <p>{{ s.description }}</p>
+        <small class="text-muted">{{ s.date | date }}</small>
+        <hr />
+        <button class="btn btn-sm btn-warning me-2" (click)="openModal(template, s)">Modifier</button>
+        <button class="btn btn-sm btn-danger" (click)="deleteService(s.id)">Supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h5 class="modal-title">{{ editMode ? 'Modifier' : 'Ajouter' }} un service</h5>
+    <button type="button" class="btn-close" aria-hidden="true" (click)="modalRef?.hide()"></button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="serviceForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label>Nom</label>
+        <input class="form-control" formControlName="nom" />
+        <div *ngIf="submitted && f.nom.errors" class="text-danger">Nom requis</div>
+      </div>
+      <div class="mb-3">
+        <label>Description</label>
+        <textarea class="form-control" formControlName="description"></textarea>
+        <div *ngIf="submitted && f.description.errors" class="text-danger">Description requise</div>
+      </div>
+      <button type="submit" class="btn btn-success w-100">
+        {{ editMode ? 'Mettre à jour' : 'Ajouter' }}
+      </button>
+    </form>
+  </div>
+</ng-template>

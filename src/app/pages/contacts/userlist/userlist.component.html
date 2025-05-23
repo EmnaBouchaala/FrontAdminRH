@@ -1,0 +1,103 @@
+<div class="container-fluid">
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <div class="row mb-2">
+            <div class="col-sm-4">
+              <div class="search-box me-2 mb-2 d-inline-block">
+                <div class="position-relative">
+                  <i class="bx bx-search-alt search-icon"></i>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-8">
+              <div class="text-sm-end">
+                <button type="button" data-bs-toggle="modal" (click)="openModal()" class="btn btn-success btn-rounded waves-effect waves-light addContact-modal mb-2"><i class="mdi mdi-plus me-1"></i> New Contact</button>
+              </div>
+            </div><!-- end col-->
+          </div>
+
+          <div class="table-responsive">
+            <table class="table align-middle table-nowrap table-hover dt-responsive nowrap w-100" id="userList-table">
+              <thead class="table-light">
+                <tr>
+                  <th scope="col" style="width: 40px;">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col" style="width: 200px;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let user of users; let i = index">
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ user.nom_complet }}</td>
+                  <td>{{ user.email }}</td>
+                  <td>
+                    <button class="btn btn-info btn-sm" (click)="openModal()">Edit</button>
+                    <button class="btn btn-danger btn-sm" (click)="removeUser(user.id)">Delete</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add/Edit User -->
+  <div bsModal #newContactModal="bs-modal" class="modal fade" id="newContactModal" tabindex="-1" aria-labelledby="newContactModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="newContactModalLabel">Add/Edit User</h5>
+          <button type="button" class="btn-close" (click)="cancelModal()"></button>
+        </div>
+        <div class="modal-body">
+          <form (ngSubmit)="saveUser(userForm)" #userForm="ngForm">
+            <div class="mb-3">
+              <label for="nom_complet" class="form-label">Full Name</label>
+              <input type="text" class="form-control" id="nom_complet" name="nom_complet" [(ngModel)]="newUser.nom_complet" required />
+            </div>
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" name="email" [(ngModel)]="newUser.email" required />
+            </div>
+            <div class="mb-3">
+              <label for="role_id" class="form-label">Role</label>
+              <select class="form-control" id="role_id" name="role_id" [(ngModel)]="newUser.role_id" required>
+                <option value="">Select Role</option>
+                <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="id_Service" class="form-label">Service</label>
+              <select class="form-control" id="id_Service" name="id_Service" [(ngModel)]="newUser.id_Service" required>
+                <option value="">Select Service</option>
+                <option *ngFor="let service of services" [value]="service.id">{{ service.name }}</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Confirm Delete -->
+  <div bsModal #removeItemModal="bs-modal" class="modal fade" id="removeItemModal" tabindex="-1" aria-labelledby="removeItemModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          <button type="button" class="btn-close position-absolute end-0 top-0 m-3" (click)="removeItemModal.hide()"></button>
+          <p>Are you sure you want to remove this user?</p>
+          <button type="button" class="btn btn-danger" (click)="confirmDelete()">Remove</button>
+          <button type="button" class="btn btn-secondary" (click)="removeItemModal.hide()">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

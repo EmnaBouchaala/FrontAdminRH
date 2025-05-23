@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <app-page-title title="Demandes de congé" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+
+  <div class="row">
+    @for(grid of returnedArray; track $index) {
+    <div class="col-xl-4 col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="d-flex">
+            <div class="flex-shrink-0 me-4">
+              <div class="avatar-md">
+                <span class="avatar-title rounded-circle bg-light text-danger font-size-16">
+                  <i class="mdi mdi-account-circle-outline fs-2"></i>
+                </span>
+              </div>
+            </div>
+
+            <div class="flex-grow-1 overflow-hidden">
+              <h5 class="text-truncate font-size-15 text-dark">{{ grid.user?.nom_complet }}</h5>
+              <p class="text-muted mb-2">Du {{ grid.dateDebut | date:'shortDate' }} au {{ grid.dateFin | date:'shortDate' }}</p>
+              <p class="text-muted mb-2"><strong>Matricule :</strong> {{ grid.user?.matricule }}</p>
+              <div>
+                <span class="badge"
+                      [ngClass]="{
+                        'bg-success': grid.etat === 'Accepté',
+                        'bg-warning': grid.etat === 'En attente',
+                        'bg-danger': grid.etat === 'Refusé'
+                      }">
+                  {{ grid.etat || 'En attente' }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="px-4 py-3 border-top text-center">
+          <button class="btn btn-success btn-sm me-2" (click)="updateEtat(grid, 'Accepté')" [disabled]="grid.etat === 'Accepté'">Accepter</button>
+          <button class="btn btn-danger btn-sm" (click)="updateEtat(grid, 'Refusé')" [disabled]="grid.etat === 'Refusé'">Refuser</button>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <ul class="pagination justify-content-end mb-2 pagination-rounded justify-content-center p-2">
+        <pagination class="pagination-wrap hstack gap-2"
+                    [totalItems]="demandes?.length"
+                    [itemsPerPage]="endItem"
+                    (pageChanged)="pageChanged($event)">
+        </pagination>
+      </ul>
+    </div>
+  </div>
+</div>

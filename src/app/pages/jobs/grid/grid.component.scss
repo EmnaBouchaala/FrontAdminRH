@@ -1,0 +1,326 @@
+/* --- BASE --- */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.75); /* effet glassmorphism */
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 45px rgba(0, 0, 0, 0.15);
+}
+
+/* --- TITRE --- */
+h3 {
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: #d62828;
+  position: relative;
+  animation: slideInFromLeft 1s ease forwards;
+}
+
+h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(to right, #e63946, #f77f00);
+  border-radius: 2px;
+  animation: lineGrow 1s ease-in-out;
+}
+
+/* --- LISTE DES FORMATIONS --- */
+.list-group-item {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.list-group-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 12px rgba(230, 57, 70, 0.2);
+}
+
+/* --- BOUTONS --- */
+.btn-primary {
+  background: linear-gradient(to right, #e63946, #f77f00);
+  border: none;
+  border-radius: 30px;
+  padding: 10px 22px;
+  color: white;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  transform: scale(1.07);
+  background: linear-gradient(to right, #f94144, #f3722c);
+  box-shadow: 0 0 10px rgba(255, 70, 70, 0.4);
+}
+
+.btn-secondary {
+  background-color: #f4a261;
+  color: #fff;
+  border: none;
+}
+
+.btn-secondary:hover {
+  background-color: #e76f51;
+  transform: scale(1.05);
+}
+
+.btn-success {
+  background-color: #2a9d8f;
+  border: none;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background-color: #21867a;
+  transform: scale(1.05);
+}
+
+.btn-outline-success {
+  border-color: #2a9d8f;
+  color: #2a9d8f;
+}
+
+.btn-outline-success:hover {
+  background-color: #2a9d8f;
+  color: #fff;
+}
+
+/* --- MODAL --- */
+.modal-header {
+  background-color: #ffe5e5;
+  border-bottom: 2px solid #f77f00;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.modal-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #d62828;
+}
+
+.modal-body h6 {
+  font-size: 1.2rem;
+  color: #d00000;
+  margin-bottom: 10px;
+  animation: fadeInUp 0.4s ease;
+}
+
+.modal-body p {
+  font-size: 1.1rem;
+  color: #444;
+  animation: fadeInUp 0.4s ease;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f8f8f8;
+}
+
+/* Modal Styling */
+.modal-content {
+  border-radius: 18px;
+  border: none;
+  background: #fff;
+  color: #222;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Header */
+.modal-header {
+  background: linear-gradient(90deg, #c4001e, #ff4b5c);
+  color: #fff;
+  padding: 20px;
+  border-top-left-radius: 18px;
+  border-top-right-radius: 18px;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.btn-close {
+  background-color: #fff;
+  opacity: 0.8;
+  border-radius: 50%;
+}
+
+/* Corps du quiz */
+.modal-body {
+  padding: 30px;
+}
+
+h6 {
+  font-size: 18px;
+  color: #c4001e;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+p {
+  font-size: 20px;
+  font-weight: 500;
+  color: #222;
+}
+
+/* Champs animés */
+.form-check {
+  position: relative;
+  background: #fff;
+  border: 2px solid #c4001e;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.form-check:hover {
+  background: #fff4f4;
+  border-color: #ff4b5c;
+  transform: scale(1.02);
+}
+
+.form-check-input {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  transform: scale(1.3);
+  accent-color: #c4001e;
+}
+
+.form-check-label {
+  margin-left: 40px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Boutons stylisés */
+.btn-secondary {
+  background: transparent;
+  color: #c4001e;
+  border: 2px solid #c4001e;
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: #c4001e;
+  color: white;
+}
+
+.btn-success {
+  background: linear-gradient(to right, #c4001e, #ff4b5c);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 30px;
+  color: white;
+  font-weight: 600;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 15px rgba(196, 0, 30, 0.4);
+}
+
+.btn-success:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 20px rgba(196, 0, 30, 0.5);
+}
+
+/* Message aucune question */
+.text-center p {
+  font-size: 18px;
+  color: #444;
+  font-weight: 500;
+}
+
+
+input[type="radio"] {
+  accent-color: #e63946;
+  margin-right: 8px;
+}
+
+/* --- ALERTES --- */
+.alert-info {
+  background-color: #ffe8e8;
+  color: #e63946;
+  font-weight: 600;
+  border: 1px solid #ffc5c5;
+  padding: 15px;
+  font-size: 1.1rem;
+  margin-top: 20px;
+  border-radius: 8px;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes lineGrow {
+  from {
+    width: 0;
+  }
+  to {
+    width: 80px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

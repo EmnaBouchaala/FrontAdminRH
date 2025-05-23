@@ -1,0 +1,76 @@
+/* ---- Conteneur principal ---- */
+.card {
+  border: none;
+  border-radius: 14px;
+  background: #fff6f6; /* fond très clair, légèrement rosé */
+  box-shadow: 0 8px 24px rgba(211, 3, 3, 0.12);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+/* ---- En-tête ---- */
+.card-header {
+  background-color: #d30303; /* rouge foncé */
+  color: white;
+  padding: 1rem 1.5rem;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+/* ---- Labels ---- */
+.form-label {
+  font-weight: 600;
+  color: #b10202; /* rouge foncé un peu moins intense */
+}
+
+/* ---- Champs de saisie ---- */
+.form-control,
+.form-select {
+  border-radius: 12px;
+  border: 1px solid #f0bebe; /* bordure rouge très clair */
+  padding: 0.6rem 1rem;
+  background-color: #fff;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #d30303; /* rouge foncé */
+  box-shadow: 0 0 0 3px rgba(211, 3, 3, 0.25);
+  outline: none;
+}
+
+/* ---- Bouton principal ---- */
+.btn-primary {
+  background-color: #d30303; /* rouge foncé */
+  border: none;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-weight: 600;
+  color: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 16px rgba(211, 3, 3, 0.3);
+  cursor: pointer;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #a00101; /* rouge foncé plus sombre au hover */
+  box-shadow: 0 8px 25px rgba(160, 0, 1, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  background-color: #f0bebe;
+  cursor: not-allowed;
+  box-shadow: none;
+}

@@ -1,0 +1,169 @@
+<div class="container-fluid">
+
+  <!-- start page title -->
+  <app-page-title title="Chartjs chart" [breadcrumbItems]="breadCrumbItems"></app-page-title>
+  <!-- end page title -->
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Line Chart</h4>
+          <div class="row text-center">
+            <div class="col-4">
+              <h5 class="mb-0">86541</h5>
+              <p class="text-muted text-truncate">Activated</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">2541</h5>
+              <p class="text-muted text-truncate">Pending</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">102030</h5>
+              <p class="text-muted text-truncate">Deactivated</p>
+            </div>
+          </div>
+          <div class="chartjs-chart">
+            <!-- Line Chart -->
+            <canvas class="chartjs-chart" height="300" baseChart [data]="lineAreaChart.data" [options]="lineAreaChart.options" [type]="'line'"> </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Bar Chart</h4>
+          <div class="row text-center">
+            <div class="col-4">
+              <h5 class="mb-0">2541</h5>
+              <p class="text-muted text-truncate">Activated</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">84845</h5>
+              <p class="text-muted text-truncate">Pending</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">12001</h5>
+              <p class="text-muted text-truncate">Deactivated</p>
+            </div>
+          </div>
+          <div class="chartjs-chart">
+            <!-- Bar Chart -->
+            <canvas class="chartjs-chart" baseChart [data]="barChart.data" [type]="'bar'" [options]="barChart.options" height="300">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Pie Chart</h4>
+          <div class="row text-center">
+            <div class="col-4">
+              <h5 class="mb-0">2536</h5>
+              <p class="text-muted text-truncate">Activated</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">69421</h5>
+              <p class="text-muted text-truncate">Pending</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">89854</h5>
+              <p class="text-muted text-truncate">Deactivated</p>
+            </div>
+          </div>
+          <div class="chartjs-chart">
+            <!-- Line Chart -->
+            <canvas class="chartjs-chart" baseChart [data]="pieChart.data" [type]="'pie'" [options]="pieChart.options">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Donut Chart</h4>
+          <div class="row text-center">
+            <div class="col-4">
+              <h5 class="mb-0">9595</h5>
+              <p class="text-muted text-truncate">Activated</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">36524</h5>
+              <p class="text-muted text-truncate">Pending</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">62541</h5>
+              <p class="text-muted text-truncate">Deactivated</p>
+            </div>
+          </div>
+          <div class="">
+            <!-- Bar Chart -->
+            <canvas class="chartjs-chart" baseChart [data]="donutChart.data" [type]="'doughnut'" [options]="donutChart.options">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Polar Chart</h4>
+          <div class="row text-center">
+            <div class="col-4">
+              <h5 class="mb-0">4852</h5>
+              <p class="text-muted text-truncate">Activated</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">3652</h5>
+              <p class="text-muted text-truncate">Pending</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">85412</h5>
+              <p class="text-muted text-truncate">Deactivated</p>
+            </div>
+          </div>
+          <div class="chartjs-chart">
+            <!-- Polar Chart Chart -->
+            <canvas baseChart [type]="'polarArea'" height="300"  class="chartjs-chart" [data]="polarChart.data" [options]="polarChart.options"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title mb-4">Radar Chart</h4>
+          <div class="row text-center">
+            <div class="col-4">
+              <h5 class="mb-0">694</h5>
+              <p class="text-muted text-truncate">Activated</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">55210</h5>
+              <p class="text-muted text-truncate">Pending</p>
+            </div>
+            <div class="col-4">
+              <h5 class="mb-0">489498</h5>
+              <p class="text-muted text-truncate">Deactivated</p>
+            </div>
+          </div>
+          <div class="chartjs-chart">
+            <!-- Radar Chart -->
+            <canvas baseChart [data]="radarChart.data" [type]="'radar'" [options]="radarChart.options" class="chartjs-chart">
+            </canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

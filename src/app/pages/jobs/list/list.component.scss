@@ -1,0 +1,177 @@
+/* Import des polices chic */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@700&display=swap');
+
+/* Base globale */
+:host, body, html {
+  font-family: 'Poppins', sans-serif;
+  background: #fafafa; /* Blanc cassé très clair */
+  color: #b22222; /* Rouge foncé élégant */
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Container principal avec contour rouge */
+.container {
+  background: #ffffff;
+  border: 2px solid #b22222; /* contour rouge vif */
+  border-radius: 16px;
+  max-width: 800px;
+  width: 100%;
+  padding: 40px;
+  box-shadow: 0 4px 15px rgba(178, 34, 34, 0.1);
+  text-align: center;
+}
+
+/* Titres avec Playfair Display (chic et serif), centrés et animés */
+h1.main-title {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 3.5rem;
+  color: #b22222;
+  margin-bottom: 25px;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+  animation: slideInFade 1.5s ease forwards;
+}
+
+/* Animation subtile slide + fade */
+@keyframes slideInFade {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Cartes avec contour rouge et légère ombre */
+.card {
+  background: #fff;
+  border: 2px solid #b22222;
+  border-radius: 14px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 20px rgba(178, 34, 34, 0.12);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(178, 34, 34, 0.25);
+}
+
+/* Boutons avec contour rouge, fond transparent, et animation couvrante */
+button, .btn {
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 1.15rem;
+  padding: 12px 30px;
+  border: 2px solid #b22222;
+  border-radius: 10px;
+  background: transparent;
+  color: #b22222;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 0;
+  transition: color 0.4s ease;
+  user-select: none;
+}
+
+/* Overlay animation sur bouton */
+button::before, .btn::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background: #b22222;
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  z-index: -1;
+  border-radius: 10px;
+}
+
+/* Au hover, le overlay couvre le bouton */
+button:hover::before, .btn:hover::before {
+  transform: translateX(0);
+}
+
+/* Couleur du texte au hover devient blanc */
+button:hover, .btn:hover {
+  color: #fff;
+}
+
+/* Inputs et textarea stylisés */
+input.form-control, textarea.form-control {
+  border: 2px solid #b22222;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  transition: box-shadow 0.3s ease;
+}
+
+input.form-control:focus, textarea.form-control:focus {
+  outline: none;
+  box-shadow: 0 0 8px #b22222aa;
+  border-color: #b22222;
+}
+
+/* Listes stylées avec contour rouge clair */
+.list-group-item {
+  border: 1.5px solid #b22222;
+  border-radius: 12px;
+  padding: 15px 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  color: #8b0000;
+  background: #fff8f8;
+  transition: background-color 0.3s ease, transform 0.25s ease;
+}
+
+.list-group-item:hover {
+  background-color: #f9d6d6;
+  transform: scale(1.03);
+}
+
+/* Animation d'apparition pour les cartes et listes */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card, .list-group-item {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container {
+    padding: 25px 20px;
+  }
+  h1.main-title {
+    font-size: 2.5rem;
+  }
+  button, .btn {
+    font-size: 1rem;
+    padding: 10px 25px;
+  }
+}

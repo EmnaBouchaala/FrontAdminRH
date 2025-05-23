@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --red-main: #c62828;
+  --red-dark: #8e0000;
+  --red-light: #ffebee;
+  --text-dark: #212121;
+  --text-light: #ffffff;
+}
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: var(--red-light);
+  color: var(--text-dark);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Fade-in animation */
+.fade-in {
+  animation: fadeIn 1.2s ease-in-out;
+}
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Card style */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #fff;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(198, 40, 40, 0.25);
+}
+
+.card-title {
+  font-size: 1.25rem;
+  color: var(--red-dark);
+  font-weight: 700;
+}
+
+/* Header and section background */
+.bg-primary-subtle {
+  background-color: var(--red-main) !important;
+  color: var(--text-light);
+}
+
+/* Titles and links */
+.text-primary, .text-dark:hover {
+  color: var(--red-main) !important;
+}
+
+a.text-dark:hover {
+  color: var(--red-dark) !important;
+}
+
+/* Avatar and image hover */
+.profile-user-wid img {
+  border: 3px solid var(--red-light);
+  transition: transform 0.4s ease-in-out;
+}
+.profile-user-wid img:hover {
+  transform: scale(1.05);
+}
+
+/* Timeline dots animation */
+.verti-timeline .event-timeline-dot i {
+  color: var(--red-main);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.8; }
+}
+
+/* Table style */
+.table th {
+  color: var(--red-dark);
+  font-weight: 600;
+}
+.table td {
+  color: var(--text-dark);
+}
+/* Animation d'apparition avec slide + fade */
+/* --- Apparition avec effet slide + zoom --- */
+@keyframes slideZoomIn {
+  0% {
+    transform: scale(0.95) translateY(30px);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+/* --- Glow pulsé --- */
+@keyframes glowPulse {
+  0% {
+    box-shadow: 0 0 10px rgba(198, 40, 40, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(198, 40, 40, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(198, 40, 40, 0.4);
+  }
+}
+
+/* --- Rebond sur clic --- */
+@keyframes bounceClick {
+  0% { transform: scale(1); }
+  30% { transform: scale(0.92); }
+  60% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* --- Flip au hover --- */
+.card-flip {
+  transition: transform 0.6s ease;
+  transform-style: preserve-3d;
+}
+.card-flip:hover {
+  transform: rotateY(180deg);
+}
+
+/* Appliquer les animations de base */
+.card {
+  animation: slideZoomIn 0.8s ease-out;
+  border-radius: 1rem;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(198, 40, 40, 0.2);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  will-change: transform;
+}
+
+/* Hover : glow pulsé + élévation */
+.card:hover {
+  animation: glowPulse 2s infinite;
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 10px 30px rgba(198, 40, 40, 0.4);
+}
+
+/* Rebond au clic */
+.card:active {
+  animation: bounceClick 0.4s ease;
+}
+
+/* Facultatif : différencier les animations des stats */
+.card-stat {
+  animation-delay: 0.2s;
+}
+
+/* Avatar avec glow et effet */
+.profile-user-wid img {
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  box-shadow: 0 0 12px rgba(198, 40, 40, 0.3);
+}
+.profile-user-wid img:hover {
+  transform: scale(1.1) rotate(2deg);
+  box-shadow: 0 0 20px rgba(198, 40, 40, 0.6);
+}

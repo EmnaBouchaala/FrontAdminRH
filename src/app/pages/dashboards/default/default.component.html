@@ -1,0 +1,124 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="d-flex">
+                                <div class="flex-shrink-0 me-3">
+                                    <img src="assets/images/users/avatar-1.jpg" alt="" class="avatar-md rounded-circle img-thumbnail">
+                                </div>
+                                <div class="flex-grow-1 align-self-center">
+                                    <div class="text-muted">
+                                        <p class="mb-2">Bienvenu</p>
+                                        <h5 class="mb-1">{{currentUser.nom_complet}}</h5>
+                                        <p class="mb-0">{{currentUser.role}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-8 align-self-center">
+                            <div class="text-lg-center mt-4 mt-lg-0">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div>
+                                            <p class="text-muted ">Total des Participants aux quizzes des formation</p>
+                                            <h5 >{{ totalParticipants }}</h5> <!-- Affichage du total des participants -->
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div>
+                                            <p class="text-muted">Participants ayant un score >10</p>
+                                            <h5 class="mb-0">{{ passedQuizAbove10 }}</h5> <!-- Affichage des participants ayant un score > 10 -->
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div>
+                                            <p class="text-muted ">Participants ayant un score < 10</p>
+                                            <h5 class="mb-0">{{ failedQuizBelow10 }}</h5> <!-- Affichage des participants ayant un score < 10 -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <!-- end row -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end row -->
+
+    <!-- Your other sections remain unchanged... -->
+</div>
+
+<!-- 🔓 User Info -->
+<div class="alert alert-info mb-4">
+
+  <strong>Matricule :</strong> {{ currentUser?.matriculeWindows }}&nbsp;&nbsp;
+  <strong>Service :</strong> {{ currentUser?.service?.nom }}
+</div>
+
+<div class="row mb-4">
+  <!-- MATERIEL -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Matières</h5>
+        <form *ngIf="currentUser.role==='Administrateur'"  #matiereForm="ngForm" (ngSubmit)="addMatiere(matiereForm)" class="d-flex gap-2">
+          <input class="form-control" name="nom" [(ngModel)]="newMatiere.nom" placeholder="Nom" required>
+          <input class="form-control" name="quantite" [(ngModel)]="newMatiere.quantite" type="number" placeholder="Qte" required>
+          <input class="form-control" name="dateAjout" [(ngModel)]="newMatiere.dateAjout" type="date" required>
+          <button  class="btn btn-success" type="submit">+</button>
+        </form>
+      </div>
+      <div class="card-body table-responsive p-0">
+        <table class="table table-sm table-striped mb-0">
+          <thead>
+            <tr><th>Nom</th><th>Qte</th><th>Date</th><th *ngIf="currentUser.role==='Administrateur'"></th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let m of matieres">
+              <td>{{ m.nom }}</td>
+              <td>{{ m.quantite }}</td>
+              <td>{{ m.dateAjout }}</td>
+              <td *ngIf="currentUser.role==='Administrateur'"><button class="btn btn-sm btn-danger" (click)="deleteMatiere(m.id)">x</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- TYPE FOURNITURE -->
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Types de Fourniture</h5>
+        <form *ngIf="currentUser.role==='Administrateur'" #typeForm="ngForm" (ngSubmit)="addType(typeForm)" class="d-flex gap-2">
+          <input class="form-control" name="nom" [(ngModel)]="newType.nom" placeholder="Nom" required>
+          <input class="form-control" name="qte" [(ngModel)]="newType.qte" placeholder="Qte" required>
+          <button  class="btn btn-success" type="submit">+</button>
+        </form>
+      </div>
+      <div class="card-body table-responsive p-0">
+        <table class="table table-sm table-striped mb-0">
+          <thead>
+            <tr><th>Nom</th><th>Qte</th><th *ngIf="currentUser.role==='Administrateur'"></th></tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let t of typesFourniture">
+              <td>{{ t.nom }}</td>
+              <td>{{ t.qte }}</td>
+              <td *ngIf="currentUser.role==='Administrateur'"><button class="btn btn-sm btn-danger" (click)="deleteType(t.id)">x</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
